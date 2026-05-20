@@ -238,8 +238,8 @@ bool PlannerNode::inBounds(const CellIndex & idx) const
 bool PlannerNode::isTraversable(const CellIndex & idx) const
 {
   int i = idx.y * static_cast<int>(current_map_.info.width) + idx.x;
-  // >= 90 is obstacle; -1 (unknown) is treated as free
-  return current_map_.data[i] < 90;
+ 
+  return current_map_.data[i] <=0;
 }
 
 double PlannerNode::heuristic(const CellIndex & a, const CellIndex & b) const

@@ -5,9 +5,9 @@
 MapMemoryNode::MapMemoryNode()
 : Node("map_memory"), map_memory_(robot::MapMemoryCore(this->get_logger()))
 {
-  resolution_ = 0.05;         
-  width_ = 2000;              
-  height_ = 2000;
+  resolution_ = 0.1;         
+  width_ = 1000;              
+  height_ = 1000;
   distance_threshold_ = 1.5; 
 
   costmap_received_ = false;
@@ -33,6 +33,7 @@ MapMemoryNode::MapMemoryNode()
     std::bind(&MapMemoryNode::timerCallback, this));
 
   initializeGlobalMap();
+  publishMap();
 }
 
 void MapMemoryNode::initializeGlobalMap()
@@ -73,9 +74,10 @@ void MapMemoryNode::timerCallback()
   double dy = robot_y_ - last_update_y_;
   double dist = std::sqrt(dx * dx + dy * dy);
 
-  if (dist >= distance_threshold_) {
+  if (!map_initialized_ || dist >= distance_threshold_) {
     last_update_x_ = robot_x_;
     last_update_y_ = robot_y_;
+    map_initialized_ = true;
     integrateCostmap();
     publishMap();
   }

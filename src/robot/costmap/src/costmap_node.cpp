@@ -8,7 +8,7 @@ CostmapNode::CostmapNode()
   resolution_ = 0.1;      
   width_ = 200;             
   height_ = 200;
-  inflation_radius_ = 0.5;
+  inflation_radius_ = 1.5;
 
   lidar_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
     "/lidar", 10,

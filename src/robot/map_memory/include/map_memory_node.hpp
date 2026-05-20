@@ -19,14 +19,12 @@ private:
   rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr map_pub_;
   rclcpp::TimerBase::SharedPtr timer_;
 
-  // Global map
   nav_msgs::msg::OccupancyGrid global_map_;
 
-  // Latest costmap
   nav_msgs::msg::OccupancyGrid latest_costmap_;
   bool costmap_received_;
+  bool map_initialized_ = false;
 
-  // Robot position tracking
   double robot_x_;
   double robot_y_;
   double robot_yaw_;
@@ -34,7 +32,6 @@ private:
   double last_update_y_;
   bool odom_received_;
 
-  // Params
   double distance_threshold_;
   double resolution_;
   int width_;
