@@ -5,10 +5,10 @@
 MapMemoryNode::MapMemoryNode()
 : Node("map_memory"), map_memory_(robot::MapMemoryCore(this->get_logger()))
 {
-  resolution_ = 0.05;         // 5cm per cell (finer than costmap)
-  width_ = 2000;              // 2000 cells = 100m x 100m
+  resolution_ = 0.05;         
+  width_ = 2000;              
   height_ = 2000;
-  distance_threshold_ = 1.5;  // update every 1.5m
+  distance_threshold_ = 1.5; 
 
   costmap_received_ = false;
   odom_received_ = false;
@@ -126,7 +126,7 @@ void MapMemoryNode::publishMap()
 
 double MapMemoryNode::extractYaw(const geometry_msgs::msg::Quaternion& q)
 {
-  // yaw from quaternion: atan2(2*(w*z + x*y), 1 - 2*(y*y + z*z))
+  
   return std::atan2(2.0 * (q.w * q.z + q.x * q.y),
                     1.0 - 2.0 * (q.y * q.y + q.z * q.z));
 }
